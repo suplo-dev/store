@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
+import Autoplay from 'embla-carousel-autoplay'
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -70,12 +71,13 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card'
+import { onMounted, ref } from 'vue';
 </script>
 
 <template>
     <Head title="Kuto">
-        <link rel="preconnect" href="https://rsms.me/" />
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+<!--        <link rel="preconnect" href="https://rsms.me/" />-->
+<!--        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />-->
     </Head>
     <header class="bg-white shadow-md">
         <div class="container mx-auto px-4 py-3">
@@ -149,9 +151,9 @@ import {
     <div class="main">
         <div class="container mx-auto px-4 py-3">
             <div class="flex">
-                <Carousel class="relative w-3/5">
+                <Carousel class="relative w-3/5" :plugins="[Autoplay({delay: 2000})] ">
                     <CarouselContent>
-                        <CarouselItem v-for="(banner, index) in 4" :key="index">
+                        <CarouselItem v-for="(banner, index) in 3" :key="index">
                             <Card>
                                 <CardContent class="flex items-center justify-center p-0">
                                     <img class="object-cover w-full" :src="`/img/${banner}.jpg`" alt="">
@@ -194,7 +196,7 @@ import {
                 :opts="{align: 'start',}"
             >
                 <CarouselContent>
-                    <CarouselItem v-for="(_, index) in 10" :key="index" class="md:basis-1/2 lg:basis-1/5">
+                    <CarouselItem v-for="(_, index) in 10" :key="index" class="md:basis-1/2 lg:basis-1/5" @click="$inertia.visit(route('product-detail'))">
                         <div class="p-1">
                             <Card class="border-0">
                                 <CardContent class="aspect-square p-0 w-64 m-auto">
